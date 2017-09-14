@@ -4,4 +4,8 @@ provider "aws" {
 
 resource "aws_vpc" "WWW" {
   cidr_block = "172.23.0.0/16"
+
+  tags {
+    Name = "WWW"
+  }
 }
