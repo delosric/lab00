@@ -9,3 +9,23 @@ resource "aws_vpc" "WWW" {
     Name = "WWW"
   }
 }
+
+resource "aws_subnet" "AZa" {
+  vpc_id            = "${aws_vpc.WWW.id}"
+  cidr_block        = "172.23.1.0/24"
+  availability_zone = "eu-west-1a"
+
+  tags {
+    Name = "AZa"
+  }
+}
+
+resource "aws_subnet" "AZb" {
+  vpc_id            = "${aws_vpc.WWW.id}"
+  cidr_block        = "172.23.2.0/24"
+  availability_zone = "eu-west-1b"
+
+  tags {
+    Name = "AZb"
+  }
+}
