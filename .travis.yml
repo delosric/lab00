@@ -3,13 +3,13 @@ env:
   - COMPONENT=front
   - TOOLS_DIR=$HOME/tools
   - PATH=$TOOLS_DIR/bin:$PATH
-
+  - AWS_DEFAULT_REGION=eu-west-1
+  - secure: ORz5ABmrQaOfamI0bFok6Mx8u5++pApK+VGZdlPnENNrQaGM9NIl9OAwscJZrqToDGB36A7LTS4W8xffP32WOJmuO9qGuAmEH41OG3EiiclcbgBHrMpH+U7A3Q+Z8+m1Igllz4qgOHU/P3oyjbh0ublgM+VL+Fxw67DMdJZaqQHurW0ph2fJzVmTZirYSPJ/MFIrkfshPhrjcjvzAOnrXTJUXVF/EnzAhTGOSsQQdfW0z4HCml7WaNS6B9wAAWtUC+Q1meynippl+emqzMuGSVPuvyZ9U0HVxiwZFuCBgrPf+3cehdufkgEB2DtOSxFk+qNscy9Tdzua+nDC4ukTqXSFFBcvOi2CGQ0dsPwy9Iq/EYq2OuvnIky9v0fYjwVnnJKqUEP2OClLOREQlZBp9wWiYLee+CNDxNVXG5vF2VovtMj6fsRDGpkdCDy+Wni0+IxnmhnNSQNyr84rqrx3nGrFMw0/agNO1Gwep2dS9Xtq7hAyLbQ4ULZ0YvH2UmAIXaI7sDKe5jc3pxUOuDQLGjs6LN5YhKSO/QLaJ1zX0jEM5Z8urV9cwLnG/6m24wYDs0apI7GLz/FMcb4PVkRJz7k+uCt2xlijlucs208v7nMtZsVfhhTT/ZT3bbHDsTbOUbaSuQl/AowWolvt09AsxoPytxEanIj6ei16PV+Fn6Y=
+  - secure: mMBtPV8Xt/sPiegFEdYyy+R3RS657RKoouePnaLv4VglM3huwtQxZG/F0FAHdefzzqdBHj/OhxcD/E+116qNXcimxSxlcJDMV8Xj+L8+VW+yh+nSB1a/i3QhsatIj0P8T70JUzjQsSDY8zVnx/xkrZv+hRvReuRo9pwtVdB/4Dx5EMKibdr77Zte8MKgOLhoIvwdyl8Ifcx0h9GvptJqITcOYlfyUTTZDK5aWbB48d9kXMGaERKLEt/TqqNiYVBIrOPeUeUA+dJrCdNvVH2iSVP/fC+j+5Q2t/QfORnH6XjY7kgA9gVTyoeLYhKrA4l5h7dPY/hO8el2brBfYthnq617V3iLt8ARudOJayZrax6jhQ6gp+4u37/VPFVmsy+VSpV4Vg73DjjUOJTB/0Y7icKBjKmcU/L4dEWdbcYl39TVIbSdlRjNfpU1BWjeW0h219QWAoo3kRwJHTLLWnae1AQuSoWWhcHicI+LkptBU6mX3CJXQqOFTn0ajke88x35JUeQyS3Blz7AEinVJ3ulmUIqgz9AcJ7kI675jW6vCHbQgKwHz6tcY0kb+Yp0RxHbX2pg8Do2UfIxy7s8bUaFsx67Rx6ebjX2RXjl7XEz2CflfPrJHRmHqYYX32YGDzgy7lZ4jIUKhIbBRKWsCW67CGAGur+kKZ3/XsghXo8Al6I=
 sudo: required
-
 before_deploy:
 - sudo pip install 'requests[security]' awscli
-- $TRAVIS_BUILD_DIR/tools/install_packages.sh $TOOLS_DIR
-
+- "$TRAVIS_BUILD_DIR/tools/install_packages.sh $TOOLS_DIR"
 deploy:
 - cd $TRAVIS_BUILD_DIR/tools
-- ./deploy.sh
+- "./deploy.sh"
