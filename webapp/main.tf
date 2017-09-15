@@ -10,22 +10,6 @@ provider "aws" {
   region = "eu-west-1"
 }
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
-}
-
 data "terraform_remote_state" "WWW" {
   backend = "s3"
 
@@ -36,18 +20,6 @@ data "terraform_remote_state" "WWW" {
   }
 }
 
-#resource "aws_instance" "web" {
-#  ami                    = "${data.aws_ami.ubuntu.id}"
-#  instance_type          = "t2.micro"
-#  key_name               = "GSK.key"
-#  vpc_security_group_ids = ["${aws_security_group.sgWEB.id}"]
-#  user_data              = "${data.template_file.USERDATA.rendered}"
-#  subnet_id              = "${data.terraform_remote_state.WWW.AZa_id}"
-
-#  tags {
-#    Name = "HelloWorld"
-#  }
-#}
 
 resource "aws_security_group" "sgWEB" {
   name        = "sgWEB"
@@ -129,10 +101,9 @@ data "template_file" "USERDATA" {
 resource "aws_launch_configuration" "LC" {
   name_prefix     = "LC"
   key_name        = "GSK.key"
-  image_id        = "${data.aws_ami.ubuntu.id}"
+  image_id        = "${var.ami_id}"
   instance_type   = "t2.micro"
   security_groups = ["${aws_security_group.sgWEB.id}"]
-  user_data       = "${data.template_file.USERDATA.rendered}"
 
   lifecycle {
     create_before_destroy = "true"

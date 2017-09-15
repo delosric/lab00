@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 apt-get update -q
-apt-get upgrade -y
+#apt-get upgrade -y
 apt-get install -y git nginx
 rm /etc/nginx/sites-enabled/default 
 cat > /etc/nginx/conf.d/webapp.conf <<EOF
@@ -13,5 +13,5 @@ EOF
 mkdir /var/webapp
 cp /tmp/index.html /var/webapp/
 HOST=`hostname`
-sed -i "s#everybody#___MYUSER___ at $HOST#" /var/webapp/index.html
+sed -i "s#everybody#Guillaume at $HOST#" /var/webapp/index.html
 systemctl restart nginx
