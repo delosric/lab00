@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 apt-get update -q
-apt-get upgrade -y
+#apt-get upgrade -y
 apt-get install -y git nginx
 rm /etc/nginx/sites-enabled/default 
 cat > /etc/nginx/conf.d/webapp.conf <<EOF

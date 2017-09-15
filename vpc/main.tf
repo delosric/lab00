@@ -40,6 +40,37 @@ resource "aws_subnet" "AZb" {
   }
 }
 
+resource "aws_internet_gateway" "IGW" {
+  vpc_id = "${aws_vpc.WWW.id}"
+
+  tags {
+    Name = "IGW"
+  }
+}
+
+resource "aws_route_table" "RT" {
+  vpc_id = "${aws_vpc.WWW.id}"
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = "${aws_internet_gateway.IGW.id}"
+  }
+
+  tags {
+    Name = "RT"
+  }
+}
+
+resource "aws_route_table_association" "ASSa" {
+  subnet_id      = "${aws_subnet.AZa.id}"
+  route_table_id = "${aws_route_table.RT.id}"
+}
+
+resource "aws_route_table_association" "ASSb" {
+  subnet_id      = "${aws_subnet.AZa.id}"
+  route_table_id = "${aws_route_table.RT.id}"
+}
+
 output "WWW_id" {
   value = "${aws_vpc.WWW.id}"
 }
