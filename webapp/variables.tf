@@ -1,0 +1,3 @@
+variable "AZs" {
+  type = "list"
+}

@@ -11,7 +11,7 @@ provider "aws" {
 }
 
 resource "aws_vpc" "WWW" {
-  cidr_block = "172.23.0.0/16"
+  cidr_block = "${var.vpc_cidr}"
 
   tags {
     Name = "WWW"
@@ -20,7 +20,7 @@ resource "aws_vpc" "WWW" {
 
 resource "aws_subnet" "AZa" {
   vpc_id                  = "${aws_vpc.WWW.id}"
-  cidr_block              = "172.23.1.0/24"
+  cidr_block              = "${var.zonea_cidr}"
   availability_zone       = "eu-west-1a"
   map_public_ip_on_launch = "true"
 
@@ -31,7 +31,7 @@ resource "aws_subnet" "AZa" {
 
 resource "aws_subnet" "AZb" {
   vpc_id                  = "${aws_vpc.WWW.id}"
-  cidr_block              = "172.23.2.0/24"
+  cidr_block              = "${var.zoneb_cidr}"
   availability_zone       = "eu-west-1b"
   map_public_ip_on_launch = "true"
 
@@ -67,7 +67,7 @@ resource "aws_route_table_association" "ASSa" {
 }
 
 resource "aws_route_table_association" "ASSb" {
-  subnet_id      = "${aws_subnet.AZa.id}"
+  subnet_id      = "${aws_subnet.AZb.id}"
   route_table_id = "${aws_route_table.RT.id}"
 }
 
@@ -81,4 +81,9 @@ output "AZa_id" {
 
 output "AZb_id" {
   value = "${aws_subnet.AZb.id}"
+}
+
+output "subnets" {
+value = ["${aws_subnet.AZa.id}","${aws_subnet.AZb.id}"]
+
 }
