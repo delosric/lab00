@@ -6,12 +6,15 @@ env:
 
 language: bash
 
-sudo: required
+  - AWS_DEFAULT_REGION=eu-west-1
+  - secure: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfa3jRvePHwuvxfFRTgnbMRmKsHekLUuk2oaSBJS2/WKARDeHOqMpy65p//m9ZFnDxZCqVAbdwMlAPn0vXhsqQXUOE1AeAdKPjkbY/5p4KeO10KTiyqJkc8D+qWASTZM43SS4lHYIWFAk0zHILYUvS8yryUAxQHx0XUMJwJnmM5ulAbPdDulWhQBo3t4X6VKdx2YGZzcy7Qzt8BjTmQAAsH7Qp+0yhxr0O8AswAua/tUac46/gfZ9ddk4yfT+GpaElJFjs3uWQ+JuN1u02zdbSfBmQCnHiu5z3iWUksA0GXA8xbmhWB6BvMJcS6QhlIH/Qb1xh2eJp0gYiWD2M0+Ut linux@linux
 
+
+  #- secure: iGqesjIFB7jc2duHD7v5dGyEI7iH6OJ2YV0B4dSdP2g0ulMUMD8xBRJt960lZv1Slfioe2A9F7m4ZWsy2XGFhpINZYf5w5pY2MOIJ/JwuglEn1WivrlHcTXgbS/VprCD8i4+XC72k9IHNaYIKlfY4VvF5NQ9fz2ePPid9hN+wdZRjorBn1EFuJi6v+dn/8LngrgDwl/zLaoAOcF7iQ+s4ZqLlJKbVCM763QA3oHdSinzjzsJGzixf9QHgKEtJEeNtLXKCqgWHMKs3fthha/YFITm1Dzlpc7IOXmdmp8Z3t4ymahA9oMrkDev+UlnpGZdH7zLipLiMJj4wQtnZYlI0w1bKQQgdDwRSONwt2MXjrY35XkKDRHUOIijSJfdJs871MNpZezcsu/ycAptTBJ0pUTVS1NO9nZ2Hw29P1GFJHo01ozFK2EJ+jCbecqkM0qp4/c5Z4V0djYb5kQNE3kNcdJpfbBWYxYZ11q/gtkahFMkfhtxXo3n2EJw8fGAenv6SM60UgH2WqFiZB20GoYfP+hfy+FMS1jwd0rOLaRZZRy8updqa3ukcIOtufEXebf5IuQ0DJ8muTGzPTBcPslGbN8M5oCVNW82GU3lCzJzFpuPKrAJLyDPiTen80OY+DOno1b5IhUbz7gNFMGUPRo8K+fBSNgp9z/MZi1myzjO2Ss=
+sudo: required
 before_deploy:
 - sudo pip install 'requests[security]' awscli
-- $TRAVIS_BUILD_DIR/tools/install_packages.sh $TOOLS_DIR
-
+- "$TRAVIS_BUILD_DIR/tools/install_packages.sh $TOOLS_DIR"
 deploy:
   - provider: script
     skip_cleanup: true
