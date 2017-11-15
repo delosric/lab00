@@ -9,16 +9,16 @@ variable environment {
 # Create a new instance of the latest Ubuntu 14.04 on an
 # t2.micro node with an AWS Tag naming it "HelloWorld"
 
-data "aws_ami" "ami_web" {
-  most_recent = true
+#data "aws_ami" "ami_web" {
+#  most_recent = true
 
-  filter {
-    name   = "name"
-    values = ["web*"]
-  }
+#  filter {
+#    name   = "name"
+#    values = ["web*"]
+#  }
 
-  owners = ["self"]
-}
+#  owners = ["self"]
+#}
 
 #data "aws_ami" "ubuntu" {
 #  most_recent = true
@@ -68,7 +68,9 @@ resource "aws_elb" "web_elb" {
 
 resource "aws_launch_configuration" "web" {
   name     = "web_server_config"
-  image_id = "${data.aws_ami.ami_web.id}"
+  image-id = "${var.ami_id}"
+
+#  image_id = "${data.aws_ami.ami_web.id}"
 
   # image_id      = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.micro"
