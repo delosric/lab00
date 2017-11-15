@@ -68,7 +68,7 @@ resource "aws_elb" "web_elb" {
 
 resource "aws_launch_configuration" "web" {
   name     = "web_server_config"
-  image-id = "${var.ami_id}"
+  image_id = "${var.ami_id}"
 
 #  image_id = "${data.aws_ami.ami_web.id}"
 
